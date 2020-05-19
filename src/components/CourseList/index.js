@@ -9,14 +9,26 @@ function addCourseAction(title) {
     title,
   };
 }
+function removeCourseAction(title) {
+  return {
+    type: "REMOVE_COURSE",
+    title,
+  };
+}
+
+
 
 export default function CourseList() {
-  const qty = 2;
-  const courses = useSelector(state => state.data.slice(0, qty));
+  // const qty = 5;
+  // const courses = useSelector(state => state.data.slice(0, qty), [qty]);
+  const { data: courses, name } = useSelector(state => state);
   const dispatch = useDispatch();
-
+  console.log(name);
   function addCourse() {
     dispatch(addCourseAction("GraphQL"));
+  }
+  function removeCourse(){
+    dispatch(removeCourseAction());
   }
 
   return (
@@ -28,6 +40,9 @@ export default function CourseList() {
       </ul>
       <button type="button" onClick={addCourse}>
         Adicionar Curso
+      </button>
+      <button type="button" onClick={removeCourse}>
+        Remover Curso
       </button>
     </>
   );
